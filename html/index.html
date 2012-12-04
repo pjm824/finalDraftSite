@@ -17,8 +17,10 @@
     /* Padding below the footer and lighter body text */
 
     body {
+      padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
       padding-bottom: 40px;
       color: #5a5a5a;
+      background: #E1DCD8;
     }
 
 
@@ -236,11 +238,32 @@
       .featurette-heading {
         font-size: 30px;
       }
+      
       .featurette .lead {
         font-size: 18px;
         line-height: 1.5;
       }
-
+    }
+    
+    .circleBackgroundBlack {
+		background: black;
+		border-radius: 85px;
+	}
+  
+	.opacityHalf {
+    	opacity: 0.5;
+    }
+    
+    .nameDiv {
+	    margin-top: -101px;
+		font-size: 35px;
+		color: white;
+		text-align: center;
+		display: none;
+    }
+    
+    .displayBlock {
+	    display: block;
     }
     </style>
     <link href="../bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
@@ -260,8 +283,8 @@
 
   <body>
 
-	<div class="container navbar-wrapper">
-		<div class="navbar navbar-inverse">
+	<div class="container navbar-wrapper ">
+		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container">
 					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -299,16 +322,39 @@
 		<div class="carousel-inner">
 			<div class="item active">
 				<img src="../images/slider/slide1.jpg" alt="">
-				<div class="carousel-caption">
-					<h4>Title for the image</h4>
-					<p>Description for the image</p>
-				</div>
+				<div class="container">
+					<div class="carousel-caption">
+						<h1>THE FINAL DRAFTS</h1>
+						<p class="lead"></p>
+					</div>
+            	</div>
 			</div>
 			<div class="item">
 				<img src="../images/slider/slide2.jpg" alt="">
+				<div class="container">
+					<div class="carousel-caption">
+						<h1>Picture Day</h1>
+						<p class="lead">These are some bad mamma jammas</p>
+					</div>
+            	</div>
 			</div>
 			<div class="item">
 				<img src="../images/slider/slide3.jpg" alt="">
+				<div class="container">
+					<div class="carousel-caption">
+						<h1>Picture Day</h1>
+						<p class="lead">We will model for you</p>
+					</div>
+            	</div>
+			</div>
+			<div class="item">
+				<img src="../images/slider/slide4.jpg" alt="">
+				<div class="container">
+					<div class="carousel-caption">
+						<h1>Corona!</h1>
+						<p class="lead">The beer of choice</p>
+					</div>
+            	</div>
 			</div>
 		</div>
 		<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
@@ -318,31 +364,48 @@
     <div class="container">
 		
 		<div class="row">
-			<h2>The Members</h2>
-			<div class="span2">
-				<img class="img-circle" src="../images/circles/blackWidow.png">
+			<div class="span2" id="bwDiv">
+				<div class="circleBackgroundBlack">
+					<img id="blackWidowPic" class="img-circle" src="../images/circles/blackWidow.png">
+				</div>
+				<div id="nameCharles" class="nameDiv">Charles</div>
 			</div>
-			<div class="span2">
-				<img class="img-circle" src="../images/circles/hulk.png">
+			<div class="span2" id="hDiv">
+				<div class="circleBackgroundBlack">
+					<img id="hulkPic" class="img-circle" src="../images/circles/hulk.png">
+				</div>
+				<div id="nameJames" class="nameDiv">James</div>
 			</div>
-			<div class="span2">
-				<img class="img-circle" src="../images/circles/thor.png">
+			<div class="span2" id="tDiv">
+				<div class="circleBackgroundBlack">
+					<img id="thorPic" class="img-circle" src="../images/circles/thor.png">
+				</div>
+				<div id="nameJonathan" class="nameDiv">Jonathan</div>
 			</div>
-			<div class="span2">
-				<img class="img-circle" src="../images/circles/hawkeye.png">
+			<div class="span2" id="hDiv">
+				<div class="circleBackgroundBlack">
+					<img id="hawkeyePic" class="img-circle" src="../images/circles/hawkeye.png">
+				</div>
+				<div id="nameJoon" class="nameDiv">Joon</div>
 			</div>
-			<div class="span2">
-				<img class="img-circle" src="../images/circles/ironMan.png">
+			<div class="span2" id="imDiv">
+				<div class="circleBackgroundBlack">
+					<img id="ironManPic" class="img-circle" src="../images/circles/ironMan.png">
+				</div>
+				<div id="namePaul" class="nameDiv">Paul</div>
 			</div>
-			<div class="span2">
-				<img class="img-circle" src="../images/circles/captainAmerica.png">
+			<div class="span2" id="caDiv">
+				<div class="circleBackgroundBlack">
+					<img id="capAmericaPic" class="img-circle" src="../images/circles/captainAmerica.png">
+				</div>
+				<div id="nameWill" class="nameDiv">Will</div>
 			</div>
 		</div>
 		
 		<hr>
 	
 		<footer>
-			<p>&copy; Copyright Paul Min 2012</p>
+			
 		</footer>
 		
     </div> <!-- /container -->
@@ -366,7 +429,70 @@
 
 	<script>
 	$(document).ready(function(){
-		$('.carousel').carousel();
+		/********* hide all elements i don't want to show in the beginning ***********/
+		
+	
+		$('.carousel').carousel();		// initiate picture carousel
+		
+		// when circle image on home page is hovered over
+		$('.img-circle').hover(function(){
+			$(this).toggleClass("opacityHalf");		// change opacity to .5
+			
+			// show name for this image
+		/*	var currentId = $(this).attr('id');
+			if (currentId == "blackWidowPic") {
+				$('#nameCharles').toggleClass('displayBlock');
+			} else if (currentId == "hulkPic") {
+				$('#nameJames').toggleClass('displayBlock');
+			} else if (currentId == "thorPic") {
+				$('#nameJonathan').toggleClass('displayBlock');
+			} else if (currentId == "hawkeyePic") {
+				$('#nameJoon').toggleClass('displayBlock');
+			} else if (currentId == "ironManPic") {
+				$('#namePaul').toggleClass('displayBlock');
+			} else if (currentId == "capAmericaPic") {
+				$('#nameWill').toggleClass('displayBlock');
+			}*/
+		});
+		
+		// change circle image on hover
+		$('.img-circle')
+			.mouseover(function() {
+				var currentId = $(this).attr('id');
+				var src;
+				if (currentId == 'blackWidowPic') {
+					src = "../images/circles/charlesFace.jpg";
+				} else if (currentId == 'hulkPic') {
+					src = "../images/circles/jamesFace.jpg";
+				} else if (currentId == 'thorPic') {
+					src = "../images/circles/jonathanFace.jpg";
+				} else if (currentId == 'hawkeyePic') {
+					src = "../images/circles/joonFace.jpg";
+				} else if (currentId == 'ironManPic') {
+					src = "../images/circles/paulFace.jpg";
+				} else {
+					src = "../images/circles/willFace.jpg";
+				}
+				$(this).attr("src", src);
+			})
+			.mouseout(function() {
+				var currentId = $(this).attr('id');
+				var src;
+				if (currentId == 'blackWidowPic') {
+					src = "../images/circles/blackWidow.png";
+				} else if (currentId == 'hulkPic') {
+					src = "../images/circles/hulk.png";
+				} else if (currentId == 'thorPic') {
+					src = "../images/circles/thor.png";
+				} else if (currentId == 'hawkeyePic') {
+					src = "../images/circles/hawkeye.png";
+				} else if (currentId == 'ironManPic') {
+					src = "../images/circles/ironMan.png";
+				} else {
+					src = "../images/circles/captainAmerica.png";
+				}
+				$(this).attr("src", src);
+			});
 	});
 </script>
 	
