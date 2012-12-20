@@ -27,7 +27,7 @@
 		/* Custom container */
 		  .container-narrow {
 			margin: 0 auto;
-			width: 400px;
+			width: 800px;
 			height: 300px;
 			padding-top: 400px;
 			text-align:center;
@@ -48,6 +48,13 @@
 		h2 {
 			color: white;
 		}
+		
+		#awesome {
+			font-family: "HelveticaNeueW01-Thin","HelveticaNeue-Light","Helvetica Neue Light",Helvetica,Arial,sans-serif;
+			font-size: 5.5em;
+			line-height: 1em;
+			font-weight: normal;
+		}
 		</style>
 	</head>
 
@@ -62,9 +69,15 @@
 		</audio>
 		
 		<div class="container-narrow">
-			<h2>Loading...</h2>
-			<div class="progress progress-striped active">
-				<div class="bar" style="width: 0%;"></div>
+			<div id="loading">
+				<h2>Loading...</h2>
+				<div class="progress progress-striped active">
+					<div class="bar" style="width: 0;"></div>
+				</div>
+			</div>
+			<div id="enter" class="hide">
+				<h2 id="awesome">Enter for Awesomeness</h2>
+				<button class="btn btn-large btn-primary" type="button">You know you want to</button>
 			</div>
 		</div>
 	</body>
@@ -76,17 +89,33 @@
 		//set volume audio
 		document.getElementById('audio').volume=0.5;
 	
-		var progress = setInterval(function() {
-		var $bar = $('.bar');
-		
-		if ($bar.width()==400) {
-			clearInterval(progress);
-			$('.progress').removeClass('active');
-			//window.location="home.html";
-		} else {
-			$bar.width($bar.width()+40);
-		}
-		$bar.text($bar.width()/4 + "%");
-	}, 800);
+		setTimeout(function(){
+
+		// to animate the progress bar
+        $('.progress .bar').each(function() {
+            var me = $(this);
+            var perc = 100;
+
+            //TODO: left and right text handling
+
+            var current_perc = 0;
+
+            var progress = setInterval(function() {
+                if (current_perc>=perc) {
+                	$('#loading').hide();
+                	$('#enter').show();
+                    clearInterval(progress);
+                } else {
+                    current_perc +=1;
+                    me.css('width', (current_perc)+'%');
+                }
+
+                me.text((current_perc)+'%');
+
+            }, 50);
+
+        });
+
+    },300);
 	</script>
 </html>
